@@ -1,4 +1,4 @@
-import re  # Importa o módulo 're' que fornece suporte para expressões regulares
+import re
 
 # Definindo os tipos de tokens
 # Cada entrada no dicionário 'TOKEN_TYPES' associa um nome de token a uma expressão regular
@@ -7,7 +7,7 @@ TOKEN_TYPES = {
     'IDENTIFICADOR': r'[a-zA-Z_][a-zA-Z0-9_]*',
     'INTEIRO': r'\d+',  # Inteiros são sequências de dígitos (0-9)
     # Strings são delimitadas por aspas duplas e permitem escapes (ex: \" dentro da string)
-    'STRING': r'"(?:\\.|[^"\\])*"',
+    'STRING': r'"(.*?)"',
     # Operadores incluem os caracteres +, -, *, /, =, <, >, ou ,
     'OPERADOR': r'[+\-*/=<>,]',
     'SEPARADOR': r'[();,]',  # Separadores incluem os caracteres ;, (, ) e ,
@@ -15,7 +15,7 @@ TOKEN_TYPES = {
     'PALAVRA_RESERVADA': r'\b(int|string)\b'
 }
 
-# Função para gerar tokens
+# Função para gerar tokens a partir de um código-fonte
 
 
 def gerar_tokens(codigo):
@@ -48,15 +48,13 @@ def gerar_tokens(codigo):
             # Adiciona o token à lista com o tipo e valor identificados
             tokens.append((tipo, valor))
 
-    return tokens  # Retorna a lista de tokens identificados
+    return tokens
 
 # Função para imprimir os tokens
 
 
 def imprimir_tokens(tokens):
-    # Itera sobre cada token na lista de tokens
     for tipo, valor in tokens:
-        # Imprime o tipo e o valor de cada token
         print(f'Tipo: {tipo}, Valor: {valor}')
 
 
@@ -67,7 +65,7 @@ def test(codigo_fonte):
 
 if __name__ == '__main__':
     codigo_fonte = """
-        int x = 10;
+        string x = "Olá, mundo!";
         string y = "hello";
         int z = x + 20;
     """
