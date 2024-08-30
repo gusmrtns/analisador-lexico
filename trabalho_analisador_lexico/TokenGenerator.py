@@ -7,7 +7,7 @@ TOKEN_TYPES = {
     'IDENTIFICADOR': r'[a-zA-Z_][a-zA-Z0-9_]*',
     'INTEIRO': r'\d+',  # Inteiros são sequências de dígitos (0-9)
     # Strings são delimitadas por aspas duplas e permitem escapes (ex: \" dentro da string)
-    'STRING': r'"(.*?)"',
+    'STRING': r'"(?:\\.|[^"\\])*"',
     # Operadores incluem os caracteres +, -, *, /, =, <, >, ou ,
     'OPERADOR': r'[+\-*/=<>,]',
     'SEPARADOR': r'[();,]',  # Separadores incluem os caracteres ;, (, ) e ,
@@ -65,7 +65,7 @@ def test(codigo_fonte):
 
 if __name__ == '__main__':
     codigo_fonte = """
-        string x = "Olá, mundo!";
+        int x = 10;
         string y = "hello";
         int z = x + 20;
     """
